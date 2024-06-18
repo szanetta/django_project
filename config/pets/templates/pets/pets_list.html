@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Adopt a Pet
+{% endblock  %}
+
+{% block content %}
+    <section>
+    <h1>Adopt a Pet</h1>
+    {% for pet in pets %}
+        <article class="pets">
+            <h2>
+                <a href ='{% url "pets:page" slug=pet.slug %}'>
+                    {{ pet.name }}
+                </a>
+            </h2>
+            <p>{{ pet.date }}</p>
+            <p>{{ pet.name }} is a {{pet.size}} {{pet.gender}} dog at the age of  {{pet.age}}.</p>
+            <p>{{ pet.characteristics }}</p>
+        </article>
+    {% endfor %}
+    </section>
+{% endblock %}
