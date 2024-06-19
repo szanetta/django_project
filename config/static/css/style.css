@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -42,9 +43,6 @@ a {
     color: #81dbb8;
 }
 
-a:hover {
-    opacity: .85;
-}
 
 .banner {
     display: block;
@@ -93,4 +91,18 @@ a:hover {
 
 .errorlist li::marker {
     content: '🚨 ';
+}
+
+.logout {
+    display: inline-block;
+}
+
+.logout-button {
+    cursor: pointer;
+    color: whitesmoke;
+    font-size: 2.5rem;
+    border: none;
+    background-color: #44B78B;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #81dbb8;
 }

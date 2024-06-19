@@ -18,7 +18,12 @@
     <nav>
         <a href='/'> About Us </a>|
         <a href='{% url "pets:list" %}'> Adopt a Pet </a>|
-        <a href='{% url "users:sign_up" %}'> Sign Up </a>
+        <a href='{% url "users:sign_up" %}'> Sign Up </a>|
+        <a href='{% url "users:sign_in" %}'> Sign In </a>|
+        <form action='{% url "users:sign_out" %}' method="post">
+            {% csrf_token %}
+            <button class='logout-button' title='Sign out'>Sign out</button>
+        </form>
     </nav>
     <main>
         {% block content %}
