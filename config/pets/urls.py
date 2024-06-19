@@ -5,5 +5,6 @@ app_name = 'pets'
 
 urlpatterns = [
     path('', views.pets_list, name='list'),
+    path('new-pet/', views.pet_new, name='new-pet'),
     path('/<slug:slug>', views.pet_page, name='page'),
 ]
