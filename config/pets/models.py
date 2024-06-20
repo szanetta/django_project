@@ -13,14 +13,21 @@ class Pet(models.Model):
     size = models.CharField(max_length=40, blank=True, null=True, choices=size_choice)
     breed = models.CharField(max_length=50)
     gender_choice = (
-            ('Male', 'Male'),
-            ('Female', 'Female')
+        ('Male', 'Male'),
+        ('Female', 'Female')
         )
     gender = models.CharField(max_length=30, blank=True, null=True, choices=gender_choice)
     age = models.IntegerField()
     characteristics = models.TextField()
     overall_health = models.TextField()
-    child_friendly = models.BooleanField(default=True)
+    # child_friendly = models.BooleanField(default=True)
+    children_choice = (
+        ('children < 5', 'children under 5 years old'),
+        ('children < 12', 'children under 12 years old'),
+        ('all age children ', 'children of all ages'),
+        ('no children ', 'can not handle the stress of children'),
+    )
+    good_in_home_with = models.CharField(max_length=50, blank=True, null=True, choices=children_choice)
     date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=100, null=True, blank=True)
 

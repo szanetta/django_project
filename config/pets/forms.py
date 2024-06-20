@@ -12,6 +12,6 @@ class SurrenderPet(forms.ModelForm):
             'age',
             'characteristics',
             'overall_health',
-            'child_friendly',
+            'good_in_home_with',
             'banner'
         ]
