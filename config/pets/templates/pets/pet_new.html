@@ -7,5 +7,12 @@
 {% block content %}
     <section>
         <h1> Fill out the following surrender form regarding the animal you would like to give up for adoption </h1>
+        <form class='form-with-validation' action='{% url "pets:new-pet" %}' method='post' enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{ form }}
+            <button class='form-submit'>Submit</button>
+
+
+        </form>
     </section>
 {% endblock %}

@@ -30,8 +30,7 @@ class Pet(models.Model):
         return super().save(*args, **kwargs)
 
     banner = models.ImageField(default='fallback.png', blank=True)
-
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.name
