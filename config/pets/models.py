@@ -20,7 +20,6 @@ class Pet(models.Model):
     age = models.IntegerField()
     characteristics = models.TextField()
     overall_health = models.TextField()
-    # child_friendly = models.BooleanField(default=True)
     children_choice = (
         ('children < 5', 'children under 5 years old'),
         ('children < 12', 'children under 12 years old'),
