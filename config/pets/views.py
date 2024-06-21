@@ -28,3 +28,5 @@ def pet_new(request):
     return render(request, 'pets/pet_new.html', {'form': form})
 
 
+def pet_approval(request):
+    return render(request,'pets/pet_approval.html')

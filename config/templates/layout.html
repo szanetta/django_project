@@ -22,8 +22,11 @@
             <a href='{% url "pets:new-pet" %}'> Surrender a Pet </a>|
             <form action='{% url "users:sign_out" %}' method="post">
                 {% csrf_token %}
-                <button class='logout-button' title='Sign out'>Sign out</button>
+                <button class='logout-button' title='Sign out'>Sign out</button> |
             </form>
+            {% if user.is_superuser %}
+                <a href='{% url "pets:approval" %}'>Waiting for approval</a>
+            {% endif %}
         {% else %}
             <a href='/'> About Us </a>|
             <a href='{% url "pets:list" %}'> Adopt a Pet </a>|
