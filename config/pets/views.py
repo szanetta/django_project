@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Pet
+from django.contrib import messages
+from .models import Pet,Notification
 from django.contrib.auth.decorators import login_required
 from . import forms
 
 
 # Create your views here.
 def pets_list(request):
-    pets = Pet.objects.all().order_by('-date')
+    pets = Pet.objects.filter(approved=True).order_by('-date')
     return render(request, 'pets/pets_list.html', {'pets': pets})
 def pet_page(request, slug):
     pet = Pet.objects.get(slug=slug)
@@ -20,9 +21,13 @@ def pet_new(request):
             new_surrender_form = form.save(commit=False)
             new_surrender_form.owner = request.user
             new_surrender_form.save()
-            # needs to be changed- now is redirecting directly to the Adopt a Pet section,
-            # without beeing approved by admin
-            return redirect('pets:list')
+            if not request.user.is_superuser:
+                notification = Notification.objects.create(
+                    user=request.user,
+                    message="Thank you for submitting the form. Your surrender application is awaiting approval."
+                )
+                return redirect('pets:list')
+            else: return redirect('pets:pets-approval-list')
     else:
         form = forms.SurrenderPet()
     return render(request, 'pets/pet_new.html', {'form': form})
@@ -37,10 +42,14 @@ def pets_approval_list(request):
 
 def pet_approval_page(request, slug):
     pet_awaiting_page = Pet.objects.get(slug=slug)
-    if request.method == "GET":
-        return render(request, 'pets/pet_approval_page.html', {'pet_awaiting_page': pet_awaiting_page})
-    else:
+    if request.method == "POST":
         data = request.POST
         if 'approved' in data:
-            print('Approved')
-        return redirect('pets:list')
+            pet_awaiting_page.approved = True
+            pet_awaiting_page.save()
+            return redirect('pets:pets-approval-list')
+        elif 'rejected' in data:
+            pet_awaiting_page.rejected = True
+            pet_awaiting_page.save()
+
+    return render(request, 'pets/pet_approval_page.html', {'pet_awaiting_page': pet_awaiting_page})

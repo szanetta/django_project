@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Pet(models.Model):
     name = models.CharField(max_length=45)
@@ -38,5 +39,14 @@ class Pet(models.Model):
     banner = models.ImageField(default='fallback.png', blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     approved = models.BooleanField('Approved', default=False)
+    rejected = models.BooleanField('Rejected', default=False)
     def __str__(self):
         return self.name
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.message
