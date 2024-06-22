@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ pet_awaiting_page.name }}
+{% endblock  %}
+
+{% block content %}
+    <section>
+        <h1> Review the surrender application for completeness and correctness
+     before submission.</h1>
+        <p>Name:</p>
+        <p>{{ pet_awaiting_page.name }}</p>
+        <img
+             class='banner'
+             src='{{ pet_awaiting_page.banner.url }}'
+             alt='{{ pet_awaiting_page.name }}'
+        />
+        <p>Characteristics:</p>
+        <p>{{ pet_awaiting_page.characteristics }}</p>
+        <p>Health:</p>
+        <p>{{ pet_awaiting_page.overall_health }}</p>
+        <p>Gender:</p>
+        <p>{{ pet_awaiting_page.gender }}</p>
+        <p>Size:</p>
+        <p>{{ pet_awaiting_page.size }}</p>
+        <p>Age:</p>
+        <p>{{ pet_awaiting_page.age }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="approved" value="Approve">
+            <input type="submit" name="rejected" value="Reject">
+        </form>
+    </section>
+{% endblock %}

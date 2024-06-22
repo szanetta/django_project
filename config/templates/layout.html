@@ -25,7 +25,7 @@
                 <button class='logout-button' title='Sign out'>Sign out</button> |
             </form>
             {% if user.is_superuser %}
-                <a href='{% url "pets:approval" %}'>Waiting for approval</a>
+                <a href='{% url "pets:pets-approval-list" %}'>Waiting for approval</a>
             {% endif %}
         {% else %}
             <a href='/'> About Us </a>|

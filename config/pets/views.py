@@ -28,5 +28,19 @@ def pet_new(request):
     return render(request, 'pets/pet_new.html', {'form': form})
 
 
-def pet_approval(request):
-    return render(request,'pets/pet_approval.html')
+def pets_approval_list(request):
+    pets_awaiting_list = Pet.objects.all().order_by('-date')
+    # if request.user.is_superuser:
+    #     #here needs to be function for approval only for super user
+    # else:
+    return render(request,'pets/pets_approval_list.html', {'pets_awaiting_list': pets_awaiting_list})
+
+def pet_approval_page(request, slug):
+    pet_awaiting_page = Pet.objects.get(slug=slug)
+    if request.method == "GET":
+        return render(request, 'pets/pet_approval_page.html', {'pet_awaiting_page': pet_awaiting_page})
+    else:
+        data = request.POST
+        if 'approved' in data:
+            print('Approved')
+        return redirect('pets:list')
