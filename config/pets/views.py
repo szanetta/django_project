@@ -21,13 +21,11 @@ def pet_new(request):
             new_surrender_form = form.save(commit=False)
             new_surrender_form.owner = request.user
             new_surrender_form.save()
+            messages.success(request,"Thank you for submiting the form. Your surrender application is awaiting approval.")
             if not request.user.is_superuser:
-                notification = Notification.objects.create(
-                    user=request.user,
-                    message="Thank you for submitting the form. Your surrender application is awaiting approval."
-                )
-                return redirect('pets:list')
-            else: return redirect('pets:pets-approval-list')
+                return redirect('pets:new-pet')
+            else:
+                return redirect('pets:pets-approval-list')
     else:
         form = forms.SurrenderPet()
     return render(request, 'pets/pet_new.html', {'form': form})
