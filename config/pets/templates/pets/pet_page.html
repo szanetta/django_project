@@ -7,12 +7,7 @@
 {% block content %}
     <section>
         <h1> Hi, my name is {{ pet.name }} </h1>
-        <img
-             class='banner'
-             src='{{ pet.banner.url }}'
-             alt='{{ pet.name }}'
-        />
-<!--        <p>{{ pet.date }}</p>-->
+        <img class='banner' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
         <h2>About me:</h2>
         <p>{{ pet.characteristics }}</p>
         <p>Health:</p>
@@ -23,5 +18,26 @@
         <p>{{ pet.size }}</p>
         <p>Age:</p>
         <p>{{ pet.age }}</p>
+
+        <h2>Apply for Adoption</h2>
+        <form class='form-with-validation' action='{% url "pets:apply_for_adoption" slug=pet.slug %}' method='post'>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            <label for="applicant_email">Your Email:</label>
+            <input type="email" id="applicant_email" name="applicant_email" required>
+            {% if form.applicant_email.errors %}
+                <div class="alert alert-danger">
+                    {{ form.applicant_email.errors }}
+                </div>
+            {% endif %}
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required>{{ form.message.value }}</textarea>
+            <input type="hidden" name="pet" value="{{ pet.id }}">
+            <button class='form-submit' type="submit">Submit</button>
+        </form>
     </section>
 {% endblock %}
