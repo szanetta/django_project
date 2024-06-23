@@ -3,14 +3,16 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
 
+from .forms import CustomUserCreationForm
 def sign_up_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            login(request, form.save())
+            user = form.save()
+            login(request, user)
             return redirect('pets:list')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'users/sign_up.html', {'form': form})
 
 def sign_in_view(request):

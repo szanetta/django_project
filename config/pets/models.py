@@ -42,11 +42,11 @@ class Pet(models.Model):
     rejected = models.BooleanField('Rejected', default=False)
     def __str__(self):
         return self.name
-class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(default=timezone.now)
-    read = models.BooleanField(default=False)
 
+class Application(models.Model):
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    applicant_email = models.EmailField()
+    message = models.TextField()
+    objects = models.Manager()
     def __str__(self):
-        return self.message
+        return f"Application for {self.pet.name} by {self.applicant_email}"
