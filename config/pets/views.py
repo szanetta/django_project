@@ -4,6 +4,7 @@ from . import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Pet, Application
 from .forms import ApplicationForm
+from django.contrib import messages
 
 def pets_list(request):
     pets = Pet.objects.filter(approved=True).order_by('-date')
@@ -90,3 +91,20 @@ def apply_for_adoption(request, slug):
 def application_submitted(request, pet_slug):
     pet = Pet.objects.get(slug=pet_slug)
     return render(request, 'pets/application_submitted.html', {'pet': pet})
+
+def remove_pet(request, slug):
+    pet = get_object_or_404(Pet, slug=slug)
+
+    if pet.owner != request.user:
+        messages.error(request, "You are not authorized to delete this pet.")
+        return redirect('pets:list')
+
+    if request.method == 'POST':
+        pet.delete()
+        messages.success(request, f"{pet.name} has been successfully deleted.")
+        return redirect('users:user_pets_list')  # Przekierowanie do listy zwierząt użytkownika
+
+    context = {
+        'pet': pet
+    }
+    return render(request, 'pets/remove_pet.html', context)

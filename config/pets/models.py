@@ -30,6 +30,7 @@ class Pet(models.Model):
     good_in_home_with = models.CharField(max_length=50, blank=True, null=True, choices=children_choice)
     date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=100, null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.slug:

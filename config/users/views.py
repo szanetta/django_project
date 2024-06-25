@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-
+from django.contrib.auth.decorators import login_required
+from pets.models import Pet
 
 from .forms import CustomUserCreationForm
 def sign_up_view(request):
@@ -32,3 +33,9 @@ def sign_out_view(request):
     if request.method == 'POST':
         logout(request)
     return redirect('pets:list')
+
+@login_required(login_url='/users/sign_in/')
+def user_pets_list(request):
+    user = request.user
+    user_pets = Pet.objects.filter(owner=user).order_by('-date')
+    return render(request, 'pets/user_pets_list.html', {'user_pets': user_pets})
