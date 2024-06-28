@@ -17,7 +17,13 @@
 <body>
     <header>
         <section class="header-title-line">
-            <h1>Pet Adoption/Surrender Application</h1>
+            {% if user.is_authenticated and not user.is_superuser %}
+                <h1>Welcome {{ user.username }}!</h1>
+            {% elif user.is_superuser %}
+                <h1>Hi {{ user.username }}, Welcome to Admin Control Panel!</h1>
+            {% else %}
+                <h1>Pet Adoption/Surrender Application</h1>
+            {% endif %}
             <button class="menu-button">
                 <div class="menu-icon"></div>
             </button>
