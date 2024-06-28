@@ -5,30 +5,30 @@
 {% endblock  %}
 
 {% block content %}
-    <section>
-        <h1> Review the surrender application for completeness and correctness
-     before submission.</h1>
+    <section class="pet-page">
+        <h3> Review the surrender application for completeness and correctness
+     before submission.</h3>
         <p>Name:</p>
-        <p>{{ pet_awaiting_page.name }}</p>
+        <a>{{ pet_awaiting_page.name }}</a>
         <img
              class='banner'
              src='{{ pet_awaiting_page.banner.url }}'
              alt='{{ pet_awaiting_page.name }}'
         />
         <p>Characteristics:</p>
-        <p>{{ pet_awaiting_page.characteristics }}</p>
+        <a>{{ pet_awaiting_page.characteristics }}</a>
         <p>Health:</p>
-        <p>{{ pet_awaiting_page.overall_health }}</p>
+        <a>{{ pet_awaiting_page.overall_health }}</a>
         <p>Gender:</p>
-        <p>{{ pet_awaiting_page.gender }}</p>
+        <a>{{ pet_awaiting_page.gender }}</a>
         <p>Size:</p>
-        <p>{{ pet_awaiting_page.size }}</p>
+        <a>{{ pet_awaiting_page.size }}</a>
         <p>Age:</p>
-        <p>{{ pet_awaiting_page.age }}</p>
+        <a>{{ pet_awaiting_page.age }}</a>
         <form method="POST">
             {% csrf_token %}
-            <input type="submit" name="approved" value="Approve">
-            <input type="submit" name="rejected" value="Reject">
+            <button class='form-submit' name="approved" type="submit">Approve</button>
+            <button class='form-submit' name="rejected" type="submit">Reject</button>
         </form>
     </section>
 {% endblock %}

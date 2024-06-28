@@ -6,13 +6,14 @@
 
 {% block content %}
     <section>
-        <h1> Follwoing surrender forms are waiting to be approved </h1>
+        <h3> Follwoing surrender forms are waiting to be approved </h3>
              {% for pet in pets_awaiting_list %}
                 {% if not pet.approved and not pet.rejected %}
                     <article class="pets">
                         <h2>
                             <a href ='{% url "pets:pet-approval-page" slug=pet.slug %}'>
-                                {{ pet.name }}
+                            {{ pet.name }}
+                            <img class='img-pet-list' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
                             </a>
                         </h2>
                         <p>{{ pet.date }} by {{ pet.owner }}</p>

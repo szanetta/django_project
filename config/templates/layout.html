@@ -27,15 +27,15 @@
                 {% if user.is_authenticated %}
                     <li><a href='/'> About Us </a></li>
                     <li><a href='{% url "pets:list" %}'> Adopt a Pet </a></li>
-                    <li><a href='{% url "pets:new-pet" %}'> Surrender a Pet </a></li>
                     <li><a href="{% url 'users:user_pets_list' %}">Your Pets</a></li>
+                    <li><a href='{% url "pets:new-pet" %}'> Surrender a Pet </a></li>
+                        {% if user.is_superuser %}
+                        <li><a href='{% url "pets:pets-approval-list" %}'>Waiting for Approval</a></li>
+                        {% endif %}
                     <li><a><form action='{% url "users:sign_out" %}' method="post">
                         {% csrf_token %}
-                        <button class='logout-button' title='Sign out'>Sign out</button>
+                        <button class='logout-button' title='Sign out'>Sign Out</button>
                     </form></a></li>
-                    {% if user.is_superuser %}
-                        <li><a href='{% url "pets:pets-approval-list" %}'>Waiting for approval</a></li>
-                    {% endif %}
                 {% else %}
                     <li><a href='/'> About Us </a></li>
                     <li><a href='{% url "pets:list" %}'> Adopt a Pet </a></li>

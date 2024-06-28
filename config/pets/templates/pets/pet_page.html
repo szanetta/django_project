@@ -5,21 +5,21 @@
 {% endblock  %}
 
 {% block content %}
-    <section>
-        <h1> Hi, my name is {{ pet.name }} </h1>
-        <img class='banner' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
-        <h2>About me:</h2>
-        <p>{{ pet.characteristics }}</p>
-        <p>Health:</p>
-        <p>{{ pet.overall_health }}</p>
-        <p>Gender:</p>
-        <p>{{ pet.gender }}</p>
-        <p>Size:</p>
-        <p>{{ pet.size }}</p>
-        <p>Age:</p>
-        <p>{{ pet.age }}</p>
+    <section class="pet-page">
+            <h3> Hi, my name is {{ pet.name }} </h3>
+            <img class='banner' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
+            <p>About me:</p>
+            <a>{{ pet.characteristics }}</a>
+            <p>Health:</p>
+            <a>{{ pet.overall_health }}</a>
+            <p>Gender:</p>
+            <a>{{ pet.gender }}</a>
+            <p>Size:</p>
+            <a>{{ pet.size }}</a>
+            <p>Age:</p>
+            <a>{{ pet.age }}</a>
 
-        <h2>Apply for Adoption</h2>
+        <h3>Submit an application for adoption:</h3>
         <form class='form-with-validation' action='{% url "pets:apply_for_adoption" slug=pet.slug %}' method='post'>
             {% csrf_token %}
             {% if form.non_field_errors %}

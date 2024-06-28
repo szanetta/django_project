@@ -10,6 +10,10 @@ body {
     background-color: #80B3B3;
     color: whitesmoke;
     font-size: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('../img/4_paws.png');
+    background-repeat: repeat-y, no-repeat;
+    background-position: right center;
 }
 
 nav {
@@ -35,28 +39,67 @@ h1 {
 }
 
 h2 {
-    font-size: 1rem;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-top: 35px;
+    margin-left: 50px;
+    margin-bottom: 30px;
 }
 
 p {
-    font-size: 1rem;
+    font-size: 1.5rem;
+}
+
+.about-us-page p {
+    font-size: 2rem;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 300px;
+    margin-left: 80px;
+    text-align: justify;
 }
 
 a {
     text-decoration: none;
-    color: #81dbb8;
+    color: #4c667e;
 }
 
-.center {
-  margin: auto;
-  width: 50%;
-  border: 3px solid D2F8F4;
-  padding: 10px;
+.img-pet-list {
+    float: left;
+    width: 15%;
+    height: 10%;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.pet-page {
+    padding: 2.5rem;
+}
+
+.pet-page h3{
+    font-size: 2rem;
+    margin-top: 35px;
+    margin-left: 0px;
+    margin-bottom: 30px;
+}
+
+.pet-page p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pet-page a {
+    font-size: 1.5rem;
+    color: whitesmoke;
 }
 
 .message {
     padding: 1rem;
-    background-color: #4C7E7E;
+    background-color: #4c7e7e;
     color: white;
     font-size: 1.5rem;
     text-align: center;
@@ -65,7 +108,7 @@ a {
 .banner {
     display: block;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px;
 }
 
 .form-with-validation {
@@ -80,6 +123,14 @@ a {
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
+}
+
+.form-with-validation textarea {
+    max-width: 700px;
+}
+
+.form-with-validation select {
+    max-width: 500px;
 }
 
 .form-with-validation input {
