@@ -12,7 +12,19 @@
             <h2>
                 <a href ='{% url "pets:page" slug=pet.slug %}'>
                     {{ pet.name }}
-                    <img class='img-pet-list' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
+                    {% if not pet.banner %}
+                            <img
+                                class='img-pet-list'
+                                src="img/fallback.png"
+                                alt='{{ pet.name }}'
+                            />
+                    {% else %}
+                            <img
+                                 class='img-pet-list'
+                                 src='{{ pet.banner.url }}'
+                                 alt='{{ pet.name }}'
+                            />
+                    {% endif %}
                 </a>
             </h2>
             <p>{{ pet.date }}</p>

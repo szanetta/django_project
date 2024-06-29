@@ -10,11 +10,19 @@
      before submission.</h3>
         <p>Name:</p>
         <a>{{ pet_awaiting_page.name }}</a>
-        <img
-             class='banner'
-             src='{{ pet_awaiting_page.banner.url }}'
-             alt='{{ pet_awaiting_page.name }}'
-        />
+        {% if pet not in pet.banner %}
+            <img
+                class='banner'
+                src="../../static/img/fallback.png"
+                alt='{{ pet_awaiting_page.name }}'
+            />
+        {% else %}
+            <img
+                class='banner'
+                src='{{ pet_awaiting_page.banner.url }}'
+                alt='{{ pet_awaiting_page.name }}'
+            />
+        {% endif %}
         <p>Characteristics:</p>
         <a>{{ pet_awaiting_page.characteristics }}</a>
         <p>Health:</p>
