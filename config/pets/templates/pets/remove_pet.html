@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Remove Pet - {{ pet.name }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>Remove Pet - {{ pet.name }}</h1>
+        <p>Are you sure you want to remove {{ pet.name }}?</p>
+        <img class='img-pet-list' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove Pet</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">Cancel</button>
+        </form>
+    </section>
+{% endblock %}
