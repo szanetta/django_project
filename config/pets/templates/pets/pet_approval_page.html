@@ -10,17 +10,17 @@
      before submission.</h3>
         <p>Name:</p>
         <a>{{ pet_awaiting_page.name }}</a>
-        {% if pet not in pet.banner %}
+        {% if pet not in pet_awaiting_page.banner %}
                 <img
                     class='banner'
-                    src='{{ pet.banner.url }}'
-                    alt='{{ pet.name }}'
+                    src='{{ pet_awaiting_page.banner.url }}'
+                    alt='{{ pet_awaiting_page.name }}'
                 />
         {% else %}
                  <img
                     class='banner'
                     src='{% static "img/fallback.PNG" %}'
-                    alt='{{ pet.name }}'
+                    alt='{{ pet_awaiting_pagev.name }}'
                  />
         {% endif %}
         <p>Characteristics:</p>

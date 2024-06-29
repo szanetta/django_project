@@ -28,8 +28,8 @@
                     </a>
                 </h2>
                 <p>{{ pet.date }}</p>
-                <a href="{% url 'pets:page' slug=pet.slug %}" class="btn btn-primary">View Details</a>
-                <a href="{% url 'pets:remove_pet' slug=pet.slug %}" class="btn btn-danger">Remove Pet</a>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">View Details</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:remove_pet' slug=pet.slug %}'">Remove Pet</button>
             </article>
         {% empty %}
             <p>You haven't added any pets yet.</p>
