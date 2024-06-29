@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+
+{% endblock  %}
+
+{% block content %}
+    <section>
+        <h3> Follwoing surrender forms are waiting to be approved </h3>
+             {% for pet in pets_awaiting_list %}
+                {% if not pet.approved and not pet.rejected %}
+                    <article class="pets">
+                        <h2>
+                            <a href ='{% url "pets:pet-approval-page" slug=pet.slug %}'>
+                            {{ pet.name }}
+                            {% if pet not in pet.banner %}
+                            <img
+                                class='img-pet-list'
+                                src='{{ pet.banner.url }}'
+                                alt='{{ pet.name }}'
+                            />
+                            {% else %}
+                            <img
+                                 class='img-pet-list'
+                                 src='{% static "img/fallback.PNG" %}'
+                                 alt='{{ pet.name }}'
+                            />
+                            {% endif %}
+                            </a>
+                        </h2>
+                            <p>{{ pet.date }} submitted by {{ pet.owner }}</p>
+                    </article>
+                {% endif %}
+            {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    {{ pet_awaiting_page.name }}
+{% endblock  %}
+
+{% block content %}
+    <section class="pet-page">
+        <h3> Review the surrender application for completeness and correctness
+     before submission.</h3>
+        <p>Name:</p>
+        <a>{{ pet_awaiting_page.name }}</a>
+        {% if pet not in pet_awaiting_page.banner %}
+                <img
+                    class='banner'
+                    src='{{ pet_awaiting_page.banner.url }}'
+                    alt='{{ pet_awaiting_page.name }}'
+                />
+        {% else %}
+                 <img
+                    class='banner'
+                    src='{% static "img/fallback.PNG" %}'
+                    alt='{{ pet_awaiting_page.name }}'
+                 />
+        {% endif %}
+        <p>Characteristics:</p>
+        <a>{{ pet_awaiting_page.characteristics }}</a>
+        <p>Health:</p>
+        <a>{{ pet_awaiting_page.overall_health }}</a>
+        <p>Gender:</p>
+        <a>{{ pet_awaiting_page.gender }}</a>
+        <p>Size:</p>
+        <a>{{ pet_awaiting_page.size }}</a>
+        <p>Age:</p>
+        <a>{{ pet_awaiting_page.age }}</a>
+        <form method="POST">
+            {% csrf_token %}
+            <button class='form-submit' name="approved" type="submit">Approve</button>
+            <button class='form-submit' name="rejected" type="submit">Reject</button>
+        </form>
+    </section>
+{% endblock %}

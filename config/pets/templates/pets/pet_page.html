@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    {{ pet.name }}
+{% endblock  %}
+
+{% block content %}
+    <section class="pet-page">
+            <h3> Hi, my name is {{ pet.name }} </h3>
+            {% if pet not in pet.banner %}
+                <img
+                    class='banner'
+                    src='{{ pet.banner.url }}'
+                    alt='{{ pet.name }}'
+                />
+            {% else %}
+                 <img
+                    class='banner'
+                    src='{% static "img/fallback.PNG" %}'
+                    alt='{{ pet.name }}'
+                 />
+            {% endif %}
+            <p>About me:</p>
+            <a>{{ pet.characteristics }}</a>
+            <p>Health:</p>
+            <a>{{ pet.overall_health }}</a>
+            <p>Gender:</p>
+            <a>{{ pet.gender }}</a>
+            <p>Size:</p>
+            <a>{{ pet.size }}</a>
+            <p>Age:</p>
+            <a>{{ pet.age }}</a>
+
+        <h3>Submit an application for adoption:</h3>
+        <form class='form-with-validation' action='{% url "pets:apply_for_adoption" slug=pet.slug %}' method='post'>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            <label for="applicant_email">Your Email:</label>
+            <input type="email" id="applicant_email" name="applicant_email" required>
+            {% if form.applicant_email.errors %}
+                <div class="alert alert-danger">
+                    {{ form.applicant_email.errors }}
+                </div>
+            {% endif %}
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required>{{ form.message.value }}</textarea>
+            <input type="hidden" name="pet" value="{{ pet.id }}">
+            <button class='form-submit' type="submit">Submit</button>
+        </form>
+    </section>
+{% endblock %}
