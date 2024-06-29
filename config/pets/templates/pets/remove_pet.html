@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block title %}
     Remove Pet - {{ pet.name }}
 {% endblock %}
@@ -8,7 +8,19 @@
     <section>
         <h1>Remove Pet - {{ pet.name }}</h1>
         <p>Are you sure you want to remove {{ pet.name }}?</p>
-        <img class='img-pet-list' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
+            {% if pet not in pet.banner %}
+                <img
+                    class='banner'
+                    src='{{ pet.banner.url }}'
+                    alt='{{ pet.name }}'
+                />
+            {% else %}
+                 <img
+                    class='banner'
+                    src='{% static "img/fallback.PNG" %}'
+                    alt='{{ pet.name }}'
+                 />
+            {% endif %}
         <form method="POST">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Remove Pet</button>

@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block title %}
     {{ pet.name }}
 {% endblock  %}
@@ -7,18 +7,18 @@
 {% block content %}
     <section class="pet-page">
             <h3> Hi, my name is {{ pet.name }} </h3>
-            {% if not pet.banner %}
+            {% if pet not in pet.banner %}
                 <img
                     class='banner'
-                    src="../../static/img/fallback.png"
+                    src='{{ pet.banner.url }}'
                     alt='{{ pet.name }}'
                 />
             {% else %}
-                <img
-                     class='banner'
-                     src='{{ pet.banner.url }}'
-                     alt='{{ pet.name }}'
-                />
+                 <img
+                    class='banner'
+                    src='{% static "img/fallback.PNG" %}'
+                    alt='{{ pet.name }}'
+                 />
             {% endif %}
             <p>About me:</p>
             <a>{{ pet.characteristics }}</a>

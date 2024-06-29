@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block title %}
     Adopt a Pet
 {% endblock  %}
@@ -12,16 +12,16 @@
             <h2>
                 <a href ='{% url "pets:page" slug=pet.slug %}'>
                     {{ pet.name }}
-                    {% if not pet.banner %}
+                    {% if pet not in pet.banner %}
                             <img
                                 class='img-pet-list'
-                                src="img/fallback.png"
+                                src='{{ pet.banner.url }}'
                                 alt='{{ pet.name }}'
                             />
                     {% else %}
                             <img
                                  class='img-pet-list'
-                                 src='{{ pet.banner.url }}'
+                                 src='{% static "img/fallback.PNG" %}'
                                  alt='{{ pet.name }}'
                             />
                     {% endif %}
