@@ -28,8 +28,8 @@
                     </a>
                 </h2>
                 <p>{{ pet.date }}</p>
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">View Details</button>
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:remove_pet' slug=pet.slug %}'">Remove Pet</button>
+                    <button type="button" class='form-submit' onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">View Details</button>
+                    <button type="button" class='form-submit' onclick="window.location.href='{% url 'pets:remove_pet' slug=pet.slug %}'">Remove Pet</button>
             </article>
         {% empty %}
             <p>You haven't added any pets yet.</p>

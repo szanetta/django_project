@@ -23,8 +23,8 @@
             {% endif %}
         <form method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Remove Pet</button>
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">Cancel</button>
+            <button type="submit" class='form-submit'>Remove Pet</button>
+            <button type="button" class='form-submit' onclick="window.location.href='{% url 'users:user_pets_list' %}'">Cancel</button>
         </form>
     </section>
 {% endblock %}
