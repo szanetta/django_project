@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    Remove Pet - {{ pet.name }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>Remove Pet - {{ pet.name }}</h1>
+        <p>Are you sure you want to remove {{ pet.name }}?</p>
+            {% if pet not in pet.banner %}
+                <img
+                    class='banner'
+                    src='{{ pet.banner.url }}'
+                    alt='{{ pet.name }}'
+                />
+            {% else %}
+                 <img
+                    class='banner'
+                    src='{% static "img/fallback.PNG" %}'
+                    alt='{{ pet.name }}'
+                 />
+            {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class='form-submit'>Remove Pet</button>
+            <button type="button" class='form-submit' onclick="window.location.href='{% url 'users:user_pets_list' %}'">Cancel</button>
+        </form>
+    </section>
+{% endblock %}

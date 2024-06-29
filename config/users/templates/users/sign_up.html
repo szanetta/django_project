@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Sign up
+{% endblock  %}
+
+{% block content %}
+    <h1> Create an account to give your dog up for adoption </h1>
+    <form class='form-with-validation' action='/users/sign_up/' method='post'>
+        {% csrf_token %}
+        {{ form }}
+        <button class='form-submit'>Submit</button>
+    </form>
+{% endblock %}

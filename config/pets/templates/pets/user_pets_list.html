@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    Your Pets
+{% endblock  %}
+
+{% block content %}
+    <section>
+        <h1>Your Pets</h1>
+        {% for pet in user_pets %}
+            <article class="pets">
+                <h2>
+                    <a href='{% url "pets:page" slug=pet.slug %}'>
+                        {{ pet.name }}
+                        {% if pet not in pet.banner %}
+                            <img
+                                class='img-pet-list'
+                                src='{{ pet.banner.url }}'
+                                alt='{{ pet.name }}'
+                            />
+                        {% else %}
+                            <img
+                                class='img-pet-list'
+                                src='{% static "img/fallback.PNG" %}'
+                                alt='{{ pet.name }}'
+                            />
+                        {% endif %}
+                    </a>
+                </h2>
+                <p>{{ pet.date }}</p>
+                    <button type="button" class='form-submit' onclick="window.location.href='{% url 'pets:page' slug=pet.slug %}'">View Details</button>
+                    <button type="button" class='form-submit' onclick="window.location.href='{% url 'pets:remove_pet' slug=pet.slug %}'">Remove Pet</button>
+            </article>
+        {% empty %}
+            <p>You haven't added any pets yet.</p>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,1 @@
+console.log('This is JS from the About Us page.')
