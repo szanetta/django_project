@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Your Pets
+{% endblock  %}
+
+{% block content %}
+    <section>
+        <h1>Your Pets</h1>
+        {% for pet in user_pets %}
+            <article class="pets">
+                <h2>
+                    <a href='{% url "pets:page" slug=pet.slug %}'>
+                        {{ pet.name }}
+                        <img class='img-pet-list' src='{{ pet.banner.url }}' alt='{{ pet.name }}' />
+                    </a>
+                </h2>
+                <p>{{ pet.date }}</p>
+                <a href="{% url 'pets:page' slug=pet.slug %}" class="btn btn-primary">View Details</a>
+                <a href="{% url 'pets:remove_pet' slug=pet.slug %}" class="btn btn-danger">Remove Pet</a>
+            </article>
+        {% empty %}
+            <p>You haven't added any pets yet.</p>
+        {% endfor %}
+    </section>
+{% endblock %}
