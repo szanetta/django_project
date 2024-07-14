@@ -1,10 +1,10 @@
-from .models import Pet
 from django.contrib.auth.decorators import login_required
 from . import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Pet, Application
 from .forms import ApplicationForm
 from django.contrib import messages
+from django.urls import reverse
 
 def pets_list(request):
     pets = Pet.objects.filter(approved=True).order_by('-date')
@@ -49,9 +49,6 @@ def pet_new(request):
 
 def pets_approval_list(request):
     pets_awaiting_list = Pet.objects.all().order_by('-date')
-    # if request.user.is_superuser:
-    #     #here needs to be function for approval only for super user
-    # else:
     return render(request,'pets/pets_approval_list.html', {'pets_awaiting_list': pets_awaiting_list})
 
 def pet_approval_page(request, slug):
@@ -102,9 +99,16 @@ def remove_pet(request, slug):
     if request.method == 'POST':
         pet.delete()
         messages.success(request, f"{pet.name} has been successfully deleted.")
-        return redirect('users:user_pets_list')  # Przekierowanie do listy zwierząt użytkownika
+        return redirect('pets:user_pets_list')  # Przekierowanie do listy zwierząt użytkownika
 
     context = {
         'pet': pet
     }
     return render(request, 'pets/remove_pet.html', context)
+
+#@login_required(login_url='/users/sign_in/') path('sign_in/', views.sign_in_view, name='sign_in'),
+@login_required(login_url='sign_in')
+def user_pets_list(request):
+    user = request.user
+    user_pets = Pet.objects.filter(owner=user).order_by('-date')
+    return render(request, 'pets/user_pets_list.html', {'user_pets': user_pets})

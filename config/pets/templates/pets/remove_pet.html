@@ -24,7 +24,7 @@
         <form method="POST">
             {% csrf_token %}
             <button type="submit" class='form-submit'>Remove Pet</button>
-            <button type="button" class='form-submit' onclick="window.location.href='{% url 'users:user_pets_list' %}'">Cancel</button>
+            <button type="button" class='form-submit' onclick="window.location.href='{% url 'pets:user_pets_list' %}'">Cancel</button>
         </form>
     </section>
 {% endblock %}

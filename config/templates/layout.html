@@ -12,7 +12,6 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 <body>
     <header>
@@ -31,9 +30,9 @@
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                    <li><a href='/'> About Us </a></li>
+                    <li><a href='{% url "about_us" %}'> About Us </a></li>
                     <li><a href='{% url "pets:list" %}'> Adopt a Pet </a></li>
-                    <li><a href="{% url 'users:user_pets_list' %}">Your Pets</a></li>
+                    <li><a href="{% url 'pets:user_pets_list' %}">Your Pets</a></li>
                     <li><a href='{% url "pets:new-pet" %}'> Surrender a Pet </a></li>
                         {% if user.is_superuser %}
                         <li><a href='{% url "pets:pets-approval-list" %}'>Waiting for Approval</a></li>
@@ -43,7 +42,7 @@
                         <button class='logout-button' title='Sign out'>Sign Out</button>
                     </form></a></li>
                 {% else %}
-                    <li><a href='/'> About Us </a></li>
+                    <li><a href='{% url "about_us" %}'> About Us </a></li>
                     <li><a href='{% url "pets:list" %}'> Adopt a Pet </a></li>
                     <li><a href='{% url "users:sign_in" %}'> Sign In </a></li>
                     <li><a href='{% url "users:sign_up" %}'> Sign Up </a></li>

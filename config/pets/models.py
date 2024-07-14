@@ -1,7 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 class Pet(models.Model):
     name = models.CharField(max_length=45)
