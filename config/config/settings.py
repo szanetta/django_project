@@ -37,7 +37,9 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["django-project-pet-application.onrender.com"]
+
+CSRF_TRUSTED_ORIGINS = ['https://django-project-pet-application.onrender.com']
 
 
 # Application definition
