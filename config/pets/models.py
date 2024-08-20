@@ -36,7 +36,7 @@ class Pet(models.Model):
             self.slug = slugify(self.name + '-' + str(self.size) + '-' + self.breed + '-' + str(self.gender)+ '-' + str(self.age))
         return super().save(*args, **kwargs)
 
-    banner = models.ImageField(upload_to='pets', default="fallback.PNG", blank=True)
+    banner = models.ImageField(upload_to='uploaded_pets', default="fallback.PNG", blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     approved = models.BooleanField('Approved', default=False)
     rejected = models.BooleanField('Rejected', default=False)
