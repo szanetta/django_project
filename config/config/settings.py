@@ -13,12 +13,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from environ import Env
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+# .env file configuration
 env = Env()
 Env.read_env()
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,7 +49,6 @@ CSRF_TRUSTED_ORIGINS = ['https://django-project-pet-application.onrender.com']
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
-    'cloudinary_storage',
     'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -147,16 +149,24 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
+# Cloudinary - Django integration
 
 MEDIA_URL = 'media/'
 
 if ENVIRONMENT == 'development':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUDINARY_URL': env('CLOUDINARY_URL')
-    }
+    cloudinary.config(
+        cloud_name=env('CLOUDINARY_NAME'),
+        api_key=env('CLOUDINARY_API_KEY'),
+        api_secret=env('CLOUDINARY_API_SECRET'),
+    )
+
+
+#    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#    CLOUDINARY_STORAGE = {
+#        'CLOUDINARY_URL': env('CLOUDINARY_URL')
+#    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
