@@ -14,15 +14,14 @@ from pathlib import Path
 import os
 from environ import Env
 
-# .env file configuration
-env = Env()
-Env.read_env()
-
-ENVIRONMENT = env('ENVIRONMENT', default='production')
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# .env file configuration
+env = Env()
+Env.read_env(BASE_DIR/'config/.env')
+
+ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
 # Quick-start development settings - unsuitable for production
