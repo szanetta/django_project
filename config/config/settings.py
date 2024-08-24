@@ -18,7 +18,7 @@ from environ import Env
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env file configuration
-Env.read_env(os.path.join(BASE_DIR/'config/.env'))
+Env.read_env(os.path.join(BASE_DIR/'.env'))
 env = Env()
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
