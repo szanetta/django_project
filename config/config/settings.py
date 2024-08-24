@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from environ import Env
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 # .env file configuration
 env = Env()
