@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env file configuration
 env = Env()
-Env.read_env(BASE_DIR/'config/.env')
+Env.read_env(BASE_DIR/'.env')
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
 
