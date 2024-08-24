@@ -12,20 +12,16 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-import environ
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env file configuration
-env = environ.Env(DEBUG=(bool, False))
-
-environ.Env.read_env(os.path.join(BASE_DIR/'config/.env'))
-
-
+Env.read_env(os.path.join(BASE_DIR/'config/.env'))
+env = Env()
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -35,12 +31,10 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = env('DEBUG')
-
-#if ENVIRONMENT == 'development':
-#    DEBUG = True
-#else:
-#    DEBUG = False
+if ENVIRONMENT == 'development':
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ["django-project-pet-application.onrender.com"]
 
