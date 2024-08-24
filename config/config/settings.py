@@ -49,13 +49,14 @@ CSRF_TRUSTED_ORIGINS = ['https://django-project-pet-application.onrender.com']
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
-    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'pets',
     'users',
 ]
@@ -149,24 +150,19 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
-# Cloudinary - Django integration
-
 MEDIA_URL = 'media/'
 
 if ENVIRONMENT == 'development':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
-    cloudinary.config(
-        cloud_name=env('CLOUDINARY_NAME'),
-        api_key=env('CLOUDINARY_API_KEY'),
-        api_secret=env('CLOUDINARY_API_SECRET'),
-    )
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-#    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-#    CLOUDINARY_STORAGE = {
-#        'CLOUDINARY_URL': env('CLOUDINARY_URL')
-#    }
+# Cloudinary - Django integration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET')
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
