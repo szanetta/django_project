@@ -18,7 +18,7 @@ from environ import Env
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # .env file configuration
-Env.read_env(os.path.join(BASE_DIR/'.env'))
+Env.read_env()
 env = Env()
 
 ENVIRONMENT = env('ENVIRONMENT', default='production')
@@ -153,11 +153,8 @@ if ENVIRONMENT == 'development':
 else:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# Cloudinary - Django integration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUD_NAME'),
-    'API_KEY': env('CLOUD_API_KEY'),
-    'API_SECRET': env('CLOUD_API_SECRET')
+    'CLOUDINARY_URL': env('CLOUDINARY_URL')
 }
 
 # Default primary key field type
