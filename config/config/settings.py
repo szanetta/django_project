@@ -148,14 +148,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 MEDIA_URL = 'media/'
 
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': env('CLOUDINARY_URL')
+}
+
 if ENVIRONMENT == 'development':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': env('CLOUDINARY_URL')
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
