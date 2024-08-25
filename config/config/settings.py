@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 from environ import Env
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import cloudinary_storage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +57,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary_storage',
-    'cloudinary',
     'pets',
     'users',
 ]
@@ -148,14 +152,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 MEDIA_URL = 'media/'
 
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': env('CLOUDINARY_URL')
-}
+#CLOUDINARY_STORAGE = {
+#    'CLOUDINARY_URL': env('CLOUDINARY_URL')
+#}
+
 
 if ENVIRONMENT == 'development':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dczhgd9vv',
+    'API_KEY': os.environ.get('CLOUDINARY_API'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
+}
 
 
 # Default primary key field type
