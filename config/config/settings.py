@@ -49,13 +49,13 @@ CSRF_TRUSTED_ORIGINS = ['https://django-project-pet-application.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
     'pets',
     'users',
